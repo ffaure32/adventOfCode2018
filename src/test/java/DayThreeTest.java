@@ -31,42 +31,53 @@ public class DayThreeTest {
 
     @Test
     public void testPartOneWithSample() {
+        // ARRANGE
         List<String> sample = SAMPLE;
-
         DayThree dayThree = new DayThree(sample);
+
+        // ACT
         int cells = dayThree.countOverlappingCells();
+
+        // ASSERT
         assertEquals(4, cells);
     }
 
     @Test
     public void testPartTwoWithSample() {
+        // ARRANGE
         List<String> sample = SAMPLE;
-
         DayThree dayThree = new DayThree(sample);
+
+        // ACT
         Claim uniqueClaim = dayThree.getUniqueClaim();
+
+        // ASSERT
         assertEquals(3, uniqueClaim.id);
     }
 
     @Test
     public void testRealPartOne() throws Exception {
-        Path path = Paths.get(getClass().getClassLoader()
-                .getResource(INPUT_DAY_3_FILE_NAME).toURI());
-
-        List<String> lines = Files.readAllLines(path);
+        // ARRANGE
+        List<String> lines = InputLoader.loadInputList(INPUT_DAY_3_FILE_NAME);
         DayThree dayThree = new DayThree(lines);
+
+        // ACT
         int cells = dayThree.countOverlappingCells();
+
+        // ASSERT
         assertEquals(116140, cells);
     }
 
     @Test
     public void testPartThreeWithSample() throws Exception {
-        Path path = Paths.get(getClass().getClassLoader()
-                .getResource(INPUT_DAY_3_FILE_NAME).toURI());
-
-        List<String> lines = Files.readAllLines(path);
-
+        // ARRANGE
+        List<String> lines = InputLoader.loadInputList(INPUT_DAY_3_FILE_NAME);
         DayThree dayThree = new DayThree(lines);
+
+        // ACT
         Claim uniqueClaim = dayThree.getUniqueClaim();
+
+        // ASSERT
         assertEquals(574, uniqueClaim.id);
     }
 

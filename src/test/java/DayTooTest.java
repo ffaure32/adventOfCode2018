@@ -27,10 +27,7 @@ public class DayTooTest {
 
     @Test
     public void testPartOne() throws Exception {
-        Path path = Paths.get(getClass().getClassLoader()
-                .getResource("inputDay2.txt").toURI());
-
-        Stream<String> lines = Files.lines(path);
+        Stream<String> lines = InputLoader.loadInputStream("inputDay2.txt");
 
         AtomicInteger numberOfThrees = new AtomicInteger();
         AtomicInteger numberOfTwos = new AtomicInteger();
