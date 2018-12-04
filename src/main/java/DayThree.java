@@ -9,33 +9,26 @@ public class DayThree {
     private final ClaimGrid claimGrid;
 
     public DayThree(List<String> lines) {
-        claims = lines.stream().map(cl -> Claim.toClaim(cl)).collect(Collectors.toList());
-        claimGrid = calculateGrid();
-        claims.stream().forEach(cl -> claimGrid.fillGrid(cl));
+        claims = lines.stream().map(Claim::toClaim).collect(Collectors.toList());
+        claimGrid = initGridWithSize();
+        claims.stream().forEach(claimGrid::fillGrid);
 
     }
 
-    private ClaimGrid calculateGrid() {
+    private ClaimGrid initGridWithSize() {
         Optional<Claim> maxWidth = claims.stream().max(Comparator.comparing(Claim::totalWidth));
         Optional<Claim> maxHeight = claims.stream().max(Comparator.comparing(Claim::totalHeight));
-        if(maxWidth.isPresent() && maxHeight.isPresent()) {
-            return new ClaimGrid(maxWidth.get().totalWidth(), maxHeight.get().totalHeight());
-        } else {
-            throw new IllegalStateException("grille malformée");
-        }
-    }
-
-    public List<Claim> getClaims() {
-        return Collections.unmodifiableList(claims);
+        int width = maxWidth.orElseThrow(IllegalStateException::new).totalWidth();
+        int height = maxHeight.orElseThrow(IllegalStateException::new).totalHeight();
+        return new ClaimGrid(width, height);
     }
 
     public int countOverlappingCells() {
-        int cells = Arrays.stream(claimGrid.grid).mapToInt(line -> (int) Arrays.stream(line).filter(i -> i > 1).count()).sum();
-        return cells;
+        return Arrays.stream(claimGrid.grid).mapToInt(line -> (int) Arrays.stream(line).filter(i -> i > 1).count()).sum();
     }
 
     public Claim getUniqueClaim() {
-        Optional<Claim> uniqueClaim = claims.stream().filter(cl -> claimGrid.isUnique(cl)).findFirst();
+        Optional<Claim> uniqueClaim = claims.stream().filter(claimGrid::isUnique).findFirst();
         return uniqueClaim.orElseThrow(IllegalStateException::new);
     }
 }

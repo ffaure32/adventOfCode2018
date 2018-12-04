@@ -11,12 +11,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertEquals;
+
 public class DayOneTest {
     @Test
     public void dayOnePartOne() throws Exception {
         Stream<String> stream = InputLoader.loadInputStream("inputDay1.txt");
-        int sum = stream.map(in -> Integer.parseInt(in)).peek(System.out::println).mapToInt(Integer::intValue).sum();
-        System.out.println(sum);
+        int sum = stream.map(in -> Integer.parseInt(in)).mapToInt(Integer::intValue).sum();
+        assertEquals(518, sum);
     }
 
     @Test
@@ -30,7 +32,7 @@ public class DayOneTest {
         while(!first.isPresent()) {
             first = lines.stream().map(Integer::parseInt).map(in -> result.addAndGet(in)).collect(Collectors.toList()).stream().filter(in -> !duplicates.add(in)).findFirst();
         }
-        System.out.println(first.get());
+        assertEquals(72889, first.get().intValue());
     }
 
 }
