@@ -44,4 +44,12 @@ public class GuardAction {
                 ", action='" + action + '\'' +
                 '}';
     }
+
+    public boolean isGuard() {
+        return getAction().startsWith("Guard");
+    }
+
+    public boolean isAction() {
+        return !getAction().startsWith("Guard");
+    }
 }

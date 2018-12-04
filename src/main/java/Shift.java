@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.util.stream.Collectors.*;
 
 public class Shift {
     private final int guardId;
@@ -38,7 +43,8 @@ public class Shift {
         LocalDate computedDate = getShiftDate(shiftDate);
         int guardId = getGuardId(guardShift);
 
-        List<Action> actionList = new ArrayList<>();
+        List<GuardAction> actions = guardActions.stream().filter(GuardAction::isAction).collect(toList());
+        List<Action> actionList = actions.stream().map(act -> Action.toAction(act)).collect(toList());
         return new Shift(guardId, computedDate, actionList);
     }
 
@@ -59,5 +65,18 @@ public class Shift {
         } else {
             throw new IllegalStateException("mauvais format");
         }
+    }
+
+    public Integer asleepTime() {
+        List<Integer> sleepIndexes = IntStream
+                .range(0, actions.size())
+                .filter(i -> actions.get(i).fellAsleep())
+                .boxed()
+                .collect(Collectors.toList());
+        int sleepTime = 0;
+        for (int i = 0; i < sleepIndexes.size(); i++) {
+            sleepTime += MINUTES.between(actions.get(sleepIndexes.get(i)).getTime(), actions.get(sleepIndexes.get(i)+1).getTime());
+        }
+        return Integer.valueOf(sleepTime);
     }
 }
