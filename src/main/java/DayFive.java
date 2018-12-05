@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 public class DayFive {
     public int findProblemUnit(String input) {
 
-        Optional<Integer> shortest = IntStream.range('a', 'z' + 1)
+        Optional<Integer> shortest = IntStream.rangeClosed('a', 'z')
                 .boxed()
                 .map(in -> String.valueOf((char) in.intValue()))
                 .map(in -> input.replace(in, "").replace(in.toUpperCase(), ""))
