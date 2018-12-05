@@ -1,10 +1,10 @@
-import com.google.common.collect.Range;
-import com.google.common.collect.RangeSet;
-import com.google.common.collect.TreeRangeSet;
+import com.google.common.collect.*;
 import model.GuardAction;
+import model.Pair;
 
 import java.time.LocalTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -37,30 +37,43 @@ public class DayFour {
 
         List<Shift> shifts = new ArrayList<>();
         for (int i = 0; i < guardIndexes.size(); i++) {
-            if(i == guardIndexes.size() - 1) {
-                Shift shift = Shift.fromActions(guardActions.subList(guardIndexes.get(i), guardActions.size()));
-                shifts.add(shift);
-            } else {
-                Shift shift = Shift.fromActions(guardActions.subList(guardIndexes.get(i), guardIndexes.get(i + 1)));
-                shifts.add(shift);
-            }
+            Shift shift = Shift.fromActions(guardActions.subList(guardIndexes.get(i), i == guardIndexes.size() - 1 ? guardActions.size() : guardIndexes.get(i + 1)));
+            shifts.add(shift);
         }
         return shifts;
     }
 
     public int findMostAsleepGuard() {
-        Map<Shift, Integer> sleemTimePerShift = shifts.stream().collect(Collectors.toMap(Function.identity(), sh -> sh.asleepTime()));
-        Map<Integer, Integer> collect = sleemTimePerShift.entrySet().stream().collect(groupingBy(ks -> ks.getKey().getGuardId(), summingInt(ks -> ks.getValue())));
-        return collect.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).map(ks -> ks.getKey()).orElseThrow(IllegalStateException::new);
+        Map<Shift, Integer> sleepTimePerShift = shifts.stream().collect(Collectors.toMap(Function.identity(), Shift::asleepTime));
+        Map<Integer, Integer> collect = sleepTimePerShift.entrySet().stream().collect(groupingBy(ks -> ks.getKey().getGuardId(), summingInt(Map.Entry::getValue)));
+        return collect.entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).map(Map.Entry::getKey).orElseThrow(IllegalStateException::new);
     }
 
-    public void findMostAsleepMinuteForGuard(int idGuard) {
+    public Pair findMostAsleepMinuteForGuard(int idGuard) {
         List<Shift> shiftsForGuard = shifts.stream().filter(sh -> sh.getGuardId() == idGuard).collect(Collectors.toList());
-        Range r = null;
-        RangeSet<Integer> rangeSet = TreeRangeSet.create();
-        //rangeSet.
+        return findMostAsleepMinuteForShifts(shiftsForGuard);
+    }
 
-        Map<Shift, Integer> sleemTimePerShift = shiftsForGuard.stream().collect(Collectors.toMap(Function.identity(), sh -> sh.asleepTime()));
+    public Pair findMostAsleepMinuteForAnyGuard() {
+        ListMultimap<Integer, Shift> shiftsPerGuard = ArrayListMultimap.create();
+        shifts.forEach(sh -> shiftsPerGuard.put(sh.getGuardId(), sh));
+        Map<Integer, Pair> mostAsleepMinutePerGuard = new HashMap<>();
+        for (Integer guardId : shiftsPerGuard.keySet()) {
+            mostAsleepMinutePerGuard.put(guardId, findMostAsleepMinuteForGuard(guardId));
+        }
+        return mostAsleepMinutePerGuard.entrySet().stream()
+                .max(Comparator.comparing(ks -> ks.getValue().second)).map(ks -> new Pair(ks.getKey(), ks.getValue().first)).orElseThrow(IllegalArgumentException::new);
+    }
 
+    private Pair findMostAsleepMinuteForShifts(List<Shift> shiftsForGuard) {
+        List<Pair> allRanges = new ArrayList<>();
+        shiftsForGuard.forEach(sh -> allRanges.addAll(sh.getSleepIntervals()));
+        Map<Integer, AtomicInteger> collect = IntStream.range(0, 60).boxed().collect(Collectors.toMap(Function.identity(), in -> new AtomicInteger(0)));
+        for(Pair range : allRanges) {
+            for (int i = range.first; i <= range.second ; i++) {
+                collect.get(i).addAndGet(1);
+            }
+        }
+        return collect.entrySet().stream().max(Comparator.comparing(ks -> ks.getValue().get())).map(ks -> new Pair(ks.getKey(), ks.getValue().intValue())).orElseThrow(IllegalStateException::new);
     }
 }

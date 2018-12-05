@@ -1,4 +1,6 @@
+import com.google.common.collect.Range;
 import model.GuardAction;
+import model.Pair;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -68,15 +70,30 @@ public class Shift {
     }
 
     public Integer asleepTime() {
-        List<Integer> sleepIndexes = IntStream
-                .range(0, actions.size())
-                .filter(i -> actions.get(i).fellAsleep())
-                .boxed()
-                .collect(Collectors.toList());
+        List<Integer> sleepIndexes = getSleepStarts();
         int sleepTime = 0;
         for (int i = 0; i < sleepIndexes.size(); i++) {
             sleepTime += MINUTES.between(actions.get(sleepIndexes.get(i)).getTime(), actions.get(sleepIndexes.get(i)+1).getTime());
         }
         return Integer.valueOf(sleepTime);
+    }
+
+    private List<Integer> getSleepStarts() {
+        return IntStream
+                    .range(0, actions.size())
+                    .filter(i -> actions.get(i).fellAsleep())
+                    .boxed()
+                    .collect(Collectors.toList());
+    }
+
+    public List<Pair> getSleepIntervals() {
+        List<Pair> sleepRanges = new ArrayList<>();
+        List<Integer> sleepIndexes = getSleepStarts();
+        for (int i = 0; i < sleepIndexes.size(); i++) {
+            Pair range = new Pair(actions.get(sleepIndexes.get(i)).getTime().getMinute(),
+                    actions.get(sleepIndexes.get(i)+1).getTime().getMinute());
+            sleepRanges.add(range);
+        }
+        return sleepRanges;
     }
 }

@@ -1,5 +1,6 @@
 import com.google.common.collect.Lists;
 import model.GuardAction;
+import model.Pair;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -29,14 +30,6 @@ public class DayFourTest {
         assertThat(shift.getGuardId()).isEqualTo(661);
         assertThat(shift.getDate()).isEqualTo(LocalDate.parse("1518-02-04"));
         assertThat(shift.getActions()).hasSize(2);
-/*
-                GuardAction{dateTime=1518-02-11T00:00, action='Guard #1367 begins shift'}
-        GuardAction{dateTime=1518-02-11T00:32, action='falls asleep'}
-        GuardAction{dateTime=1518-02-11T00:38, action='wakes up'}
-        GuardAction{dateTime=1518-02-11T00:41, action='falls asleep'}
-        GuardAction{dateTime=1518-02-11T00:55, action='wakes up'}
-        GuardAction{dateTime=1518-02-12T00:00, action='Guard #61 begins shift'}
-*/
 
     }
 
@@ -66,8 +59,29 @@ public class DayFourTest {
         List<Shift> shifts = df.getShifts();
         assertThat(shifts).hasSize(5);
         int idGuard = df.findMostAsleepGuard();
-        df.findMostAsleepMinuteForGuard(idGuard);
         assertThat(idGuard).isEqualTo(10);
+        int minute = df.findMostAsleepMinuteForGuard(idGuard).first;
+        assertThat(minute).isEqualTo(24);
+        Pair pair = df.findMostAsleepMinuteForAnyGuard();
+        assertThat(pair.first).isEqualTo(99);
+        assertThat(pair.second).isEqualTo(45);
+
+    }
+
+    @Test
+    public void realAcceptanceTest() {
+        List<String> guardActions = InputLoader.loadInputList("inputDay4.txt");
+        DayFour df = new DayFour(guardActions);
+        List<Shift> shifts = df.getShifts();
+        assertThat(shifts).hasSize(293);
+        int idGuard = df.findMostAsleepGuard();
+        assertThat(idGuard).isEqualTo(733);
+        int minute = df.findMostAsleepMinuteForGuard(idGuard).first;
+        assertThat(minute).isEqualTo(48);
+        Pair pair = df.findMostAsleepMinuteForAnyGuard();
+        assertThat(pair.first).isEqualTo(997);
+        assertThat(pair.second).isEqualTo(38);
+
     }
 
 }
