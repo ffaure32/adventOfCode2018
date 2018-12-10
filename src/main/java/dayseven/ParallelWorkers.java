@@ -2,7 +2,6 @@ package dayseven;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class ParallelWorkers {
@@ -20,15 +19,18 @@ public class ParallelWorkers {
     public int doWork() {
         int seconds = 0;
         do {
-            workers.stream().filter(Worker::isAvailable).forEach(worker -> {
-                Step step = stepData.nextChildStep();
-                if (step.getStepLetter() != "") {
-                    worker.addWork(step, stepBaseDuration);
-                }
-            });
+            workers.stream().filter(Worker::isAvailable).forEach(this::giveStepToWorker);
             workers.stream().forEach(Worker::doWork);
             seconds++;
         } while(!stepData.isComplete());
         return seconds;
     }
+
+    private void giveStepToWorker(Worker worker) {
+        Step step = stepData.nextChildStep();
+        if (step.isValidStep()) {
+            worker.addWork(step, stepBaseDuration);
+        }
+    }
+
 }

@@ -32,14 +32,15 @@ public class StepData {
     }
 
     public Step nextChildStep() {
-        String nextLetter = nextAvailableSteps.stream()
-                .filter(this::allParentsDone).findFirst().orElse("");
-        Step step = stepsByLetter.get(nextLetter);
-        if(step != null) {
+        Step step = nextAvailableSteps.stream()
+                .filter(this::allParentsDone)
+                .findFirst()
+                .map(l -> stepsByLetter.get(l))
+                .orElse(Step.emptyStep());
+        if(step.isValidStep()) {
             nextAvailableSteps.remove(step.getStepLetter());
-            return step;
         }
-        return new Step(nextLetter);
+        return step;
     }
 
     private boolean allParentsDone(String letter) {

@@ -26,4 +26,14 @@ public class InputLoader {
         }
     }
 
+    public static String loadInputAsString(String fileName) {
+        try {
+            Path path = Paths.get(InputLoader.class.getClassLoader()
+                    .getResource(fileName).toURI());
+            return new String(Files.readAllBytes(path));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

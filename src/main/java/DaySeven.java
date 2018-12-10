@@ -28,7 +28,4 @@ public class DaySeven {
         return new StepData(stepsByLetter);
     }
 
-    public Step nextStep(StepData data) {
-        return data.nextStep();
-    }
 }

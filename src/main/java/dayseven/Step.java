@@ -53,4 +53,12 @@ public class Step {
                 ", done=" + done +
                 '}';
     }
+
+    boolean isValidStep() {
+        return getStepLetter() != "";
+    }
+
+    public static Step emptyStep() {
+        return new Step("");
+    }
 }
