@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class LightPointGrid {
+    public static final char CHAR_IF_PRESENT = '#';
+    public static final char CHAR_IF_ABSENT = '.';
     List<LightPoint> lightPoints;
     private int minX;
     private int minY;
@@ -34,18 +36,14 @@ public class LightPointGrid {
     public boolean print() {
 
         int maxHeight = maxY + 1 - minY;
-        //System.out.println(maxHeight);
         if(maxHeight<=letterHeight) {
             for (int i = 0; i < maxHeight; i++) {
                 for (int j = 0; j < maxX + 1 - minX; j++) {
                     int finalI = i + minY;
                     int finalJ = j + minX;
                     Optional<LightPoint> first = lightPoints.stream().filter(lp -> lp.getPos().y == finalI && lp.getPos().x == finalJ).findFirst();
-                    if (first.isPresent()) {
-                        System.out.print('#');
-                    } else {
-                        System.out.print('.');
-                    }
+                    Character toPrint = first.map(lp -> CHAR_IF_PRESENT).orElse(CHAR_IF_ABSENT);
+                    System.out.print(toPrint);
                 }
                 System.out.println();
             }
