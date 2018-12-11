@@ -1,62 +1,60 @@
 package day9;
 
-import com.google.common.base.Stopwatch;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.math.BigInteger;
-import java.util.*;
-import java.util.stream.LongStream;
+import java.util.Arrays;
 
 public class MarbleCircle {
     long[] scores;
     long[] grid;
     int currentPlayer = 0;
     long nbPlayers;
-    long currentMarble = 2;
-    int currentIndex = 1;
-    int realGridSize;
-    Stopwatch sw;
+    int currentMarbleIndex = 0;
+
+    Marble currentMarble;
 
     public MarbleCircle(int nbPlayers, int nbMarbles) {
         this.nbPlayers = nbPlayers;
         initScores(nbPlayers);
-        initGrid(nbMarbles);
-        sw = Stopwatch.createStarted();
-    }
 
-    private void initGrid(int nbMarbles) {
-        grid = new long[nbMarbles];
-        grid[0] = 0l;
-        grid[1] = 1l;
-        realGridSize = 1;
+        currentMarble = new Marble(currentMarbleIndex++);
+        currentMarble.setNext(currentMarble);
+        currentMarble.setPrevious(currentMarble);
     }
 
     public void nextMarble() {
-        if(currentMarble % 10000 == 0) {
-            System.out.println(sw.elapsed());
-        }
         nextPlayer();
-        if(currentMarble %23 == 0) {
-            currentIndex -= 7;
-            if(currentIndex<0) {
-                currentIndex = realGridSize+currentIndex;
-            }
-            long result = grid[currentIndex];
-            grid = ArrayUtils.remove(grid, currentIndex);
-            realGridSize--;
-            long actualScore = scores[currentPlayer];
-            actualScore += result;
-            actualScore += currentMarble;
-            scores[currentPlayer] = actualScore;
+        if(currentMarbleIndex %23 == 0) {
+            long result = getMarbleScoreAndRemove(7);
+            updateScore(result);
         } else {
-            currentIndex += 2;
-            if(currentIndex>realGridSize) {
-                currentIndex = currentIndex - realGridSize;
-            }
-            grid[currentIndex] = currentMarble;
-            realGridSize++;
+            insertMarble(2);
         }
-        currentMarble++;
+        currentMarbleIndex++;
+    }
+
+    private void updateScore(long result) {
+        long actualScore = scores[currentPlayer];
+        actualScore += result;
+        actualScore += currentMarbleIndex;
+        scores[currentPlayer] = actualScore;
+    }
+
+    private long getMarbleScoreAndRemove(int moves) {
+        Marble toRemove = currentMarble.moveLeft(moves);
+        return remove(toRemove);
+    }
+
+    private long remove(Marble toRemove) {
+        long result = toRemove.getMarbleIndex();
+        currentMarble = toRemove.getNext();
+        currentMarble.setPrevious(toRemove.getPrevious());
+        return result;
+    }
+
+    private void insertMarble(int moves) {
+        Marble newMarble = new Marble(currentMarbleIndex);
+        Marble right = currentMarble.moveRight(moves);
+        right.insertBefore(newMarble);
+        currentMarble = newMarble;
     }
 
     public long maxScore() {

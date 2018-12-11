@@ -26,18 +26,20 @@ public class OtherDay9Test {
 
     @Test
     public void testInitData() {
-        verifyData(9, 25, 8317);
+        verifyData(9, 25, 32);
     }
+
     @Test
     public void testRealInputPart1() {
         verifyData(486, 70833, 373597);
     }
+
 
     private void verifyData(int nbPlayers, int nbMarbles, long expectedResult) {
         MarbleCircle marble = new MarbleCircle(nbPlayers, nbMarbles);
         for (int i = 2; i < nbMarbles; i++) {
             marble.nextMarble();
         }
-        assertEquals(BigInteger.valueOf(expectedResult), marble.maxScore());
+        assertEquals(expectedResult, marble.maxScore());
     }
 }
