@@ -1,15 +1,12 @@
 package daysix;
 
 
-
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.summingInt;
 
 public class Grid {
     private final List<Coords> initCoords;

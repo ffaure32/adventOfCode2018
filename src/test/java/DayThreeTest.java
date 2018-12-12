@@ -1,14 +1,10 @@
 import model.Claim;
-import model.ClaimGrid;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 

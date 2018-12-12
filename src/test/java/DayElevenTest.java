@@ -1,4 +1,3 @@
-import day10.Position;
 import day11.FuelGrid;
 import day11.SquarePosition;
 import org.junit.Test;

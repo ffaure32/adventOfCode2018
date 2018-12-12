@@ -1,6 +1,9 @@
 package dayseven;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Step {
     private final String stepLetter;

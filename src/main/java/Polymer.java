@@ -1,8 +1,3 @@
-import com.google.common.primitives.Chars;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
 public class Polymer {
     private String units;
 

@@ -1,9 +1,6 @@
 import day9.MarbleCircle;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import static org.junit.Assert.assertEquals;
 
 public class OtherDay9Test {

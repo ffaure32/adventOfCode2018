@@ -1,4 +1,3 @@
-import com.google.common.collect.Range;
 import model.GuardAction;
 import model.Pair;
 
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 public class Shift {
     private final int guardId;

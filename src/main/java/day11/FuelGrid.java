@@ -1,8 +1,5 @@
 package day11;
 
-import day10.Position;
-import javafx.geometry.Pos;
-
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
