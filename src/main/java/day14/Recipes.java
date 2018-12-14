@@ -21,7 +21,7 @@ public class Recipes {
 
     private void initPatternList(String inputPattern) {
         IntStream stream = inputPattern.chars();
-        patternList = stream.mapToObj(ic -> Character.getNumericValue(ic)).collect(Collectors.toList());
+        patternList = stream.mapToObj(Character::getNumericValue).collect(Collectors.toList());
     }
 
     private void initFirstRecipes() {
@@ -61,7 +61,6 @@ public class Recipes {
         addRecipe(newRecipe1);
         updateElfPosition(elf1);
         updateElfPosition(elf2);
-
     }
 
     private void updateElfPosition(Elf elf) {
