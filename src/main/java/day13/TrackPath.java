@@ -25,11 +25,11 @@ public class TrackPath {
     }
 
     public PathType from(char input) {
-        CartDirection ct = CartDirection.fromType(input);
+        CartDirection cartDirection = CartDirection.fromType(input);
         PathType pt;
-        if(ct !=null) {
-            pt = ct.getPathType();
-            this.cart = new Cart(ct, position);
+        if(cartDirection !=null) {
+            pt = cartDirection.getPathType();
+            this.cart = new Cart(cartDirection, position);
         } else {
             pt = PathType.fromType(input);
         }

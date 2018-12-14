@@ -34,17 +34,17 @@ public class TrackMap {
             TrackPath previousTrackPath = getTrackPath(c.position);
             previousTrackPath.setCart(null);
             c.move();
-            TrackPath trackPath = getTrackPath(c.position);
-            c.newDirection(trackPath.pathType);
+            TrackPath newTrackPath = getTrackPath(c.position);
+            c.newDirection(newTrackPath.pathType);
             if (isCollision(c)) {
                 if (firstCollision == null) {
                     firstCollision = c.position;
                 }
-                carts.remove(trackPath.getCart());
+                carts.remove(newTrackPath.getCart());
                 carts.remove(c);
-                trackPath.setCart(null);
+                newTrackPath.setCart(null);
             } else {
-                trackPath.setCart(c);
+                newTrackPath.setCart(c);
             }
 
         });
