@@ -2,7 +2,7 @@ package day10;
 
 import java.util.Objects;
 
-public class Position {
+public class Position implements Comparable<Position> {
     public final int x;
     public final int y;
 
@@ -32,5 +32,14 @@ public class Position {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public int compareTo(Position other) {
+        int result = this.y - other.y;
+        if(result == 0) {
+            return this.x - other.x;
+        } else {
+            return result;
+        }
     }
 }

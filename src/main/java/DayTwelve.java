@@ -1,5 +1,4 @@
 import com.google.common.base.CharMatcher;
-import com.google.common.base.Stopwatch;
 import day12.Pot;
 
 import java.util.ArrayList;
@@ -13,17 +12,15 @@ import java.util.stream.Collectors;
 public class DayTwelve {
     Pattern pattern = Pattern.compile("([#|/.]*) => ([#|/.])");
 
-    Set<String> patterns;
+    Set<String> outputPatterns;
     private long rounds;
     private String initialInput;
     private Set<String> notes;
-    private Stopwatch sw;
     public DayTwelve(long rounds, String initialInput, Set<String> initNotes) {
-        this.patterns = new HashSet<>();
+        this.outputPatterns = new HashSet<>();
         this.rounds = rounds;
         this.initialInput = initialInput;
         initNotes(initNotes);
-        sw = Stopwatch.createStarted();
     }
 
     public long computeResult() {
@@ -36,12 +33,12 @@ public class DayTwelve {
             completeList(pots);
             computeState(pots);
             String output = pots.stream().map(p -> String.valueOf(p.plant)).collect(Collectors.joining());
-            String newPattern = CharMatcher.is('.').trimFrom(output);
-            if(patterns.contains(newPattern)) {
+            String outputPattern = CharMatcher.is('.').trimFrom(output);
+            if(outputPatterns.contains(outputPattern)) {
                 indexPattern = rounds - i -1;
                 break;
             } else {
-                patterns.add(newPattern);
+                outputPatterns.add(outputPattern);
             }
         }
         long finalIndexPattern = indexPattern;
