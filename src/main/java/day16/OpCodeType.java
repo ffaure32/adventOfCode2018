@@ -6,7 +6,7 @@ public enum OpCodeType {
     ADDR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -17,7 +17,7 @@ public enum OpCodeType {
     ADDI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int valueB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -28,7 +28,7 @@ public enum OpCodeType {
     MULR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -39,7 +39,7 @@ public enum OpCodeType {
     MULI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int valueB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -50,7 +50,7 @@ public enum OpCodeType {
     BANR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -61,7 +61,7 @@ public enum OpCodeType {
     BANI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int valueB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -72,7 +72,7 @@ public enum OpCodeType {
     BORR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -83,7 +83,7 @@ public enum OpCodeType {
     BORRI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int valueB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -94,7 +94,7 @@ public enum OpCodeType {
     SETR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerC = opCodeInfo[3];
             output[registerC] = output[registerA];
@@ -104,17 +104,17 @@ public enum OpCodeType {
     SETI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int valueA = opCodeInfo[1];
             int registerC = opCodeInfo[3];
             output[registerC] = valueA;
             return output;
         }
     },
-    GETIR {
+    GTIR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int valueA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -122,10 +122,10 @@ public enum OpCodeType {
             return output;
         }
     },
-    GETRI {
+    GTRI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int valueB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -133,10 +133,10 @@ public enum OpCodeType {
             return output;
         }
     },
-    GETRR {
+    GTRR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -147,7 +147,7 @@ public enum OpCodeType {
     EQIR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int valueA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -158,7 +158,7 @@ public enum OpCodeType {
     EQRI { // 11
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int valueB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
@@ -169,7 +169,7 @@ public enum OpCodeType {
     EQRR {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
-            int[] output = Arrays.copyOf(input, 4);
+            int[] output = Arrays.copyOf(input, input.length);
             int registerA = opCodeInfo[1];
             int registerB = opCodeInfo[2];
             int registerC = opCodeInfo[3];
