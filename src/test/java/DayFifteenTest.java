@@ -229,20 +229,4 @@ public class DayFifteenTest {
             attackPower++;
         }
     }
-
-    @Test
-    public void testOtherRealInput() {
-        List<String> otherInput = InputLoader.loadInputList("otherInputDay15.txt");
-        FightMap fightMap = new FightMap(otherInput);
-        boolean fightOvers = false;
-        while (!fightOvers) {
-            fightMap.playRound();
-            fightMap.print();
-            fightMap.printPoints();
-            fightOvers = fightMap.isFightOver();
-        }
-        assertEquals(39514, fightMap.score());
-    }
-
-
 }

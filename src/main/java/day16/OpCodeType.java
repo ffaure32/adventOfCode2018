@@ -80,7 +80,7 @@ public enum OpCodeType {
             return output;
         }
     },
-    BORRI {
+    BORI {
         @Override
         public int[] apply(int[] opCodeInfo, int[] input) {
             int[] output = Arrays.copyOf(input, input.length);

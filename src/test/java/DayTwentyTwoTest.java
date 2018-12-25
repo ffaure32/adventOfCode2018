@@ -45,4 +45,11 @@ public class DayTwentyTwoTest {
         cave.print();
     }
 
+    @Test
+    public void firstMove() {
+        Cave cave = new Cave(510, new Position(10, 10));
+
+        cave.print();
+    }
+
 }

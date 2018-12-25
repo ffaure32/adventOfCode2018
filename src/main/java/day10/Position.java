@@ -42,4 +42,21 @@ public class Position implements Comparable<Position> {
             return result;
         }
     }
+
+    public Position left() {
+        return new Position(x, y-1);
+    }
+
+    public Position right() {
+        return new Position(x, y+1);
+    }
+
+    public Position up() {
+        return new Position(x-1, y);
+    }
+
+    public Position down() {
+        return new Position(x+1, y);
+    }
+
 }
