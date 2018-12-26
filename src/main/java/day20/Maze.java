@@ -11,6 +11,7 @@ public class Maze {
     public static final char SEPARATOR = '|';
     public Set<Position> farRooms = new HashSet<>();
     private int farRoomsLimit = 1000;
+    public long countRooms = 0;
 
     public int findFurthestRoom() {
         Set<Position> usedDoors = new HashSet<>();
@@ -23,12 +24,18 @@ public class Maze {
                 newPathes.addAll(findNextPathes(path, usedDoors));
             }
             firstPathes = newPathes;
-            if(doorsCount>= farRoomsLimit-3) {
+            if(doorsCount< farRoomsLimit) {
                 farRooms.addAll(newPathes);
+            } else {
+                countRooms += newPathes.size();
             }
             doorsCount++;
         }
         return doorsCount;
+    }
+
+    public long countLastPath() {
+        return maze.values().stream().filter(r -> r == Route.PATH).count() - farRooms.size();
     }
 
     private Set<Position> findNextPathes(Position position, Set<Position> usedDoors) {

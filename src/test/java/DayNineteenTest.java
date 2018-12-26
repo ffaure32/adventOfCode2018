@@ -123,11 +123,11 @@ public class DayNineteenTest {
         List<String> realInput = InputLoader.loadInputList("inputDay19.txt");
         Register register = new Register(realInput.get(0));
         register.initInstructions(realInput.subList(1, realInput.size()));
-        register.register[2] = 1;
+        register.register[1] = 1;
         register.executeInstructions();
 
         System.out.println(Arrays.toString(register.register));
-        assertEquals(1464, register.register[0]);
+        assertEquals(1464, register.register[1]);
     }
 
 }

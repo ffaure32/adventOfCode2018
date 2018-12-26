@@ -51,10 +51,12 @@ public class Register {
         }
     }
 
+    public int countExecutions;
     public void executeInstructions() {
         this.instructionPointer = 0;
         while(instructionPointer>=0 && instructionPointer<instructions.size()) {
             executeInstruction();
+            countExecutions++;
         }
     }
 

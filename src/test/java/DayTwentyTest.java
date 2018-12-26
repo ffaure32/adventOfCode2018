@@ -69,7 +69,7 @@ public class DayTwentyTest {
         // maze.print();
         int distance = maze.findFurthestRoom();
         assertEquals(3633, distance);
-        assertEquals(11, maze.farRooms.size());
+        assertEquals(11, maze.countRooms);
     }
 
     @Test
