@@ -8,22 +8,31 @@ public class DayTwentyFour {
     public HealthSystem infectionSystem;
     public HealthSystem immuneSystem;
 
-    public DayTwentyFour(List<String> immuneInput, List<String> infectionInput) {
+    public DayTwentyFour(List<String> immuneInput, List<String> infectionInput, int immuneBoost) {
         immuneSystem = new HealthSystem("Immune", immuneInput);
+        immuneSystem.groups.stream().forEach(ug -> ug.boost(immuneBoost));
         infectionSystem = new HealthSystem("Infection", infectionInput);
 
     }
 
+    public DayTwentyFour(List<String> immuneInput, List<String> infectionInput) {
+        this(immuneInput, infectionInput, 0);
+    }
+
+    long countUnits = 0;
+    long previousCountUnits = 0;
     public long fight() {
         boolean gameOver = false;
         while (!gameOver) {
             round();
-            gameOver = isSystemDead(immuneSystem) || isSystemDead(infectionSystem);
+            countUnits = countUnits(immuneSystem) + countUnits(infectionSystem);
+            gameOver = countUnits == previousCountUnits;
+            previousCountUnits = countUnits;
         }
-        return countUnits(immuneSystem) + countUnits(infectionSystem);
+        return countUnits;
     }
 
-    private boolean isSystemDead(HealthSystem system) {
+    public static boolean isSystemDead(HealthSystem system) {
         return system.groups.stream().noneMatch(g -> g.units > 0);
     }
 

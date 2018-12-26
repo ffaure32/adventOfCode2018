@@ -10,7 +10,7 @@ public class UnitGroup implements Comparable<UnitGroup> {
     public Set<String> weaknesses = new HashSet<>();
     public Set<String> immunities = new HashSet<>();
 
-    private Pattern pattern = Pattern.compile("([0-9]+) units each with ([0-9]+) hit points \\(?(.*)\\)? with an attack that does ([0-9]+) ([a-z]+) damage at initiative ([0-9]+)");
+    private Pattern pattern = Pattern.compile("([0-9]+) units each with ([0-9]+) hit points \\({1}(.*)\\){1} with an attack that does ([0-9]+) ([a-z]+) damage at initiative ([0-9]+)");
     private Pattern otherpattern = Pattern.compile("([0-9]+) units each with ([0-9]+) hit points with an attack that does ([0-9]+) ([a-z]+) damage at initiative ([0-9]+)");
     public int initiative;
     public String attackType;
@@ -38,6 +38,9 @@ public class UnitGroup implements Comparable<UnitGroup> {
         units = nbOfUnits;
     }
 
+    public void boost(int boostPoints) {
+        this.attackDamage+=boostPoints;
+    }
     public void initImmunitiesAndWeaknesses(String input) {
         String[] split = input.split("; ");
         Arrays.stream(split).forEach(this::parseWeaknessOrImmunity);
@@ -67,14 +70,18 @@ public class UnitGroup implements Comparable<UnitGroup> {
     }
 
     public void attacked(UnitGroup attacker) {
+        units = Math.max(0l, units - damaged(attacker));
+
+    }
+
+    public long damaged(UnitGroup attacker) {
         int multiply = 1;
         if(weaknesses.contains(attacker.attackType)) {
             multiply = 2;
         }
-        long unitsToRemove = attacker.effectivePower() * multiply / hitPoints;
-        units = Math.max(0l, units - unitsToRemove);
-
+        return attacker.effectivePower() * multiply / hitPoints;
     }
+
 
     @Override
     public String toString() {
