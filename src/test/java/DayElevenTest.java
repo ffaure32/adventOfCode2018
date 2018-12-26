@@ -1,5 +1,6 @@
 import day11.FuelGrid;
 import day11.SquarePosition;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -36,6 +37,7 @@ public class DayElevenTest {
     }
 
     @Test
+    @Ignore
     public void testFirstSamplePart2() {
         FuelGrid grid = new FuelGrid(18);
 
@@ -47,6 +49,7 @@ public class DayElevenTest {
     }
 
     @Test
+    @Ignore
     public void testRealInputPart2() {
         FuelGrid grid = new FuelGrid(1723);
 

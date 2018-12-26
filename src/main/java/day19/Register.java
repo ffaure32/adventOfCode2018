@@ -52,7 +52,7 @@ public class Register {
     }
 
     public void executeInstructions() {
-        this.instructionPointer = 974;
+        this.instructionPointer = 0;
         while(instructionPointer>=0 && instructionPointer<instructions.size()) {
             executeInstruction();
         }
