@@ -3,7 +3,9 @@ import day23.Nanobot;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -53,6 +55,45 @@ public class DayTwentyThreeTest {
         Nanobot strongest = day23.findStrongest();
         long result = day23.countInRange(strongest);
         assertEquals(463, result);
+    }
+
+    @Test
+    public void findBotsInRangeRealInputPart2() {
+        Long[] center = new Long[3];
+        center[0] = 0l;
+        center[1] = 0l;
+        center[2] = 0l;
+        DayTwentyThree day23 = new DayTwentyThree(InputLoader.loadInputList("inputDay23.txt"));
+        Long[] position = day23.findAveragePos();
+
+        Long[] oldposition = center;
+        long counter = 0;
+        while(!Arrays.equals(oldposition, position)) {
+            counter++;
+            oldposition = position;
+            long inRange = day23.countInRange(position);
+            Set<Long[]> newPositions = day23.aroundPositions(position);
+
+            for (Long[] pos : newPositions) {
+                long newInRange = day23.countInRange(pos);
+                if (newInRange > inRange) {
+                    position = pos;
+                    inRange = newInRange;
+                    System.out.println(newInRange);
+                } else if (newInRange == inRange) {
+                    long olddistance = Nanobot.computeDistance(center, position);
+                    long newdistance = Nanobot.computeDistance(center, pos);
+                    if (newdistance < olddistance) {
+                        position = pos;
+                    }
+
+                }
+            }
+            if(counter % 10000 == 0) {
+                System.out.println(position[0] + " " + position[1] + " " + position[2]);
+            }
+        }
+        System.out.println(position[0] + " " + position[1] + " " + position[2]);
     }
 
 }

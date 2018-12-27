@@ -17,8 +17,12 @@ class Day19(lines: List<String>) {
     }
 
     fun part2(): Int {
+        return part2(1)
+    }
+
+    fun part2(n: Int): Int {
         val regs = IntArray(6)
-        regs[0] = 1
+        regs[0] = n
         while (regs[ip] in instructions.indices) step(regs)
         return regs[0]
     }

@@ -122,7 +122,7 @@ public class DayNineteenTest {
     public void executeAllInstructionsRealInputPart2() {
         List<String> realInput = InputLoader.loadInputList("inputDay19.txt");
         Register register = new Register(realInput.get(0));
-        register.initInstructions(realInput.subList(1, realInput.size()));
+        register.initInstructions(realInput.subList(1, realInput.size()-1));
         register.register[1] = 1;
         register.executeInstructions();
 

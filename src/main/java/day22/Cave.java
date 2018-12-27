@@ -51,7 +51,9 @@ public class Cave {
     }
 
     public long riskLevel() {
-        return erosionLevels.values().stream().mapToLong(el -> el %3).sum();
+        return erosionLevels.entrySet()
+                .stream().filter(es -> es.getKey().x <= target.x
+                && es.getKey().y <= target.y).map(es -> es.getValue()).mapToLong(el -> el %3).sum();
     }
 
     public void print() {

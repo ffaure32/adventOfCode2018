@@ -23,10 +23,25 @@ public class Nanobot {
     }
 
     public boolean inRange(Nanobot strongest) {
-        long distance = 0;
-        distance += Math.abs(this.position[0] - strongest.position[0]);
-        distance += Math.abs(this.position[1] - strongest.position[1]);
-        distance += Math.abs(this.position[2] - strongest.position[2]);
+        long distance = computeDistance(strongest.position);
         return distance <= strongest.radius;
     }
+
+    public boolean inRange(Long[] position) {
+        long distance = computeDistance(position);
+        return distance <= this.radius;
+    }
+
+    private long computeDistance(Long[] position) {
+        return computeDistance(this.position, position);
+    }
+
+    public static long computeDistance(Long[] position1, Long[] position2) {
+        long distance = 0;
+        distance += Math.abs(position1[0] - position2[0]);
+        distance += Math.abs(position1[1] - position2[1]);
+        distance += Math.abs(position1[2] - position2[2]);
+        return distance;
+    }
+
 }

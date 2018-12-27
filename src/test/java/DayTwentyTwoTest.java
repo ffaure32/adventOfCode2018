@@ -40,6 +40,12 @@ public class DayTwentyTwoTest {
     }
 
     @Test
+    public void riskLevelRealInputPart2() {
+        Cave cave = new Cave(8112, new Position(13, 743));
+
+    }
+
+    @Test
     public void print() {
         Cave cave = new Cave(510, new Position(10, 10));
         cave.print();
