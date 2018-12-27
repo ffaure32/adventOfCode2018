@@ -58,6 +58,12 @@ public class DayTwentyThreeTest {
     }
 
     @Test
+    public void findBotsInRangeRealInputPart2SimpleSolution() {
+        DayTwentyThreeBis day23 = new DayTwentyThreeBis(InputLoader.loadInputList("inputDay23.txt"));
+        day23.execute();
+    }
+
+    @Test
     public void findBotsInRangeRealInputPart2() {
         Long[] center = new Long[3];
         center[0] = 0l;
@@ -65,6 +71,7 @@ public class DayTwentyThreeTest {
         center[2] = 0l;
         DayTwentyThree day23 = new DayTwentyThree(InputLoader.loadInputList("inputDay23.txt"));
         Long[] position = day23.findAveragePos();
+        System.out.println(position[0] + " " + position[1] + " " + position[2]+" "+day23.countInRange(position));
 
         Long[] oldposition = center;
         long counter = 0;
@@ -90,10 +97,10 @@ public class DayTwentyThreeTest {
                 }
             }
             if(counter % 10000 == 0) {
-                System.out.println(position[0] + " " + position[1] + " " + position[2]);
+                System.out.println(position[0] + " " + position[1] + " " + position[2]+" "+inRange);
             }
         }
-        System.out.println(position[0] + " " + position[1] + " " + position[2]);
+        System.out.println(position[0] + " " + position[1] + " " + position[2]+" "+day23.countInRange(position));
     }
 
 }
