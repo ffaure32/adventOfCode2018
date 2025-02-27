@@ -48,8 +48,8 @@ public class DayEightTest {
 
         Node node = new Node(inputArray);
 
-        assertEquals(47647, node.total());
-        assertEquals(23636, node.value());
+        assertEquals(45210, node.total());
+        assertEquals(22793, node.value());
 
     }
 

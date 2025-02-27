@@ -33,7 +33,7 @@ public class DayTwentyFourTest {
 
         DayTwentyFour day24 = new DayTwentyFour(immuneInput, infectionInput);
 
-        assertEquals(18717, day24.fight());
+        assertEquals(16678, day24.fight());
     }
 
 
@@ -68,7 +68,7 @@ public class DayTwentyFourTest {
             day24 = new DayTwentyFour(immuneInput, infectionInput, ++boost);
             result = day24.fight();
         } while (!DayTwentyFour.isSystemDead(day24.infectionSystem)) ;
-        assertEquals(5252, result);
+        assertEquals(3758, result);
     }
 
 

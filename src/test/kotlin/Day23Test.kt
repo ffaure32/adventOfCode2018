@@ -1,3 +1,4 @@
+import io.github.ephemient.aoc2018.Day23
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -8,7 +9,7 @@ class Day19Test {
         var n = 0
         do {
             try {
-                result = Day23(lines21).part2(n++)
+                result = Day23(lines21).part2(/*n++*/)!!
             } catch (e:IllegalStateException) {
                 println(n)
             }

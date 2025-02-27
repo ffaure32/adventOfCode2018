@@ -49,7 +49,7 @@ public class DayFiveTest {
 
         polymer.reaction();
 
-        assertThat(polymer.getUnits().length()).isEqualTo(11252);
+        assertThat(polymer.getUnits().length()).isEqualTo(10774);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class DayFiveTest {
         List<String> strings = InputLoader.loadInputList("inputDay5.txt");
         DayFive df = new DayFive();
         int result = df.findProblemUnit(strings.get(0));
-        assertEquals(6118, result);
+        assertEquals(5122, result);
     }
 
 }

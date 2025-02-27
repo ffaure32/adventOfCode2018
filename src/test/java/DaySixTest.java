@@ -47,7 +47,7 @@ public class DaySixTest {
 
         Grid grid = daySix.initGrid(realInput);
 
-        // assertEquals(3840, grid.findMaxRepresentedCoordCount());
+        assertEquals(3840, grid.findMaxRepresentedCoordCount());
         assertEquals(46542, grid.findContainingRegion(10000));
 
     }

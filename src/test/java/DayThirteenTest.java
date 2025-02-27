@@ -104,7 +104,7 @@ List<String> inputSample = Lists.newArrayList(
             trackMap.move();
             position = trackMap.firstCollision;
         } while(position == null);
-        assertEquals(new Position(64, 57), position);
+        assertEquals(new Position(58, 93), position);
     }
 
 
@@ -141,6 +141,6 @@ List<String> inputSample = Lists.newArrayList(
             remainingCards = trackMap.carts.size();
         } while(remainingCards > 1);
 
-        assertEquals(new Position(136, 8), trackMap.carts.get(0).position);
+        assertEquals(new Position(88, 53), trackMap.carts.get(0).position);
     }
 }

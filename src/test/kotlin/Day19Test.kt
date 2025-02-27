@@ -1,13 +1,15 @@
+import org.junit.Ignore
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class Day19Test {
+class Day19TestKotlin {
     @Test
-    fun `part 1 examples`() {
-        assertEquals(15864120, Day19(lines).part2())
+    fun `real part 2`() {
+        assertEquals(13083798, Day19(lines).part2())
     }
 
     @Test
+    @Ignore
     fun `day 21 examples`() {
         var result = -1
         var n = 0
@@ -15,7 +17,9 @@ class Day19Test {
             try {
                 result = Day19(lines21).part2(n++)
             } catch (e:IllegalStateException) {
-                println(n)
+                if(n%10000 == 0) {
+                    println(n)
+                }
             }
         } while(result < 0)
         assertEquals(15864120, result)
@@ -23,43 +27,43 @@ class Day19Test {
 
     companion object {
         private val lines = """
-#ip 2
-addi 2 16 2
-seti 1 0 4
-seti 1 5 5
-mulr 4 5 1
-eqrr 1 3 1
-addr 1 2 2
-addi 2 1 2
-addr 4 0 0
+#ip 5
+addi 5 16 5
+seti 1 3 1
+seti 1 1 2
+mulr 1 2 4
+eqrr 4 3 4
+addr 4 5 5
 addi 5 1 5
-gtrr 5 3 1
-addr 2 1 2
-seti 2 6 2
-addi 4 1 4
-gtrr 4 3 1
-addr 1 2 2
-seti 1 7 2
-mulr 2 2 2
+addr 1 0 0
+addi 2 1 2
+gtrr 2 3 4
+addr 5 4 5
+seti 2 4 5
+addi 1 1 1
+gtrr 1 3 4
+addr 4 5 5
+seti 1 5 5
+mulr 5 5 5
 addi 3 2 3
 mulr 3 3 3
-mulr 2 3 3
+mulr 5 3 3
 muli 3 11 3
-addi 1 6 1
-mulr 1 2 1
-addi 1 6 1
-addr 3 1 3
-addr 2 0 2
-seti 0 3 2
-setr 2 3 1
-mulr 1 2 1
-addr 2 1 1
-mulr 2 1 1
-muli 1 14 1
-mulr 1 2 1
-addr 3 1 3
-seti 0 9 0
-seti 0 5 2
+addi 4 8 4
+mulr 4 5 4
+addi 4 13 4
+addr 3 4 3
+addr 5 0 5
+seti 0 8 5
+setr 5 3 4
+mulr 4 5 4
+addr 5 4 4
+mulr 5 4 4
+muli 4 14 4
+mulr 4 5 4
+addr 3 4 3
+seti 0 8 0
+seti 0 4 5
             """.trimIndent().lines()
 
         private val lines21 = """

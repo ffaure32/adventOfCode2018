@@ -44,8 +44,8 @@ public class DaySeventeenTest {
         DaySeventeen day17 = new DaySeventeen();
         GroundMap map = day17.fillGroundMap(lines);
 
-        assertEquals(37073, map.countReachableTiles());
-        assertEquals(29289, map.countPersistentTiles());
+        assertEquals(52800, map.countReachableTiles());
+        assertEquals(45210, map.countPersistentTiles());
     }
 
 }

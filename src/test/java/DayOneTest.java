@@ -15,7 +15,7 @@ public class DayOneTest {
     public void dayOnePartOne() throws Exception {
         Stream<String> stream = InputLoader.loadInputStream("inputDay1.txt");
         int sum = stream.map(in -> Integer.parseInt(in)).mapToInt(Integer::intValue).sum();
-        assertEquals(518, sum);
+        assertEquals(533, sum);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class DayOneTest {
         while(!first.isPresent()) {
             first = lines.stream().map(Integer::parseInt).map(in -> result.addAndGet(in)).collect(Collectors.toList()).stream().filter(in -> !duplicates.add(in)).findFirst();
         }
-        assertEquals(72889, first.get().intValue());
+        assertEquals(73272, first.get().intValue());
     }
 
 }

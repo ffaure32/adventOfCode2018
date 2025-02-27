@@ -61,11 +61,11 @@ public class DayFourteenTest {
 
     @Test
     public void realInput() {
-        assertThat(new DayFourteen(765071).improvement()).isEqualTo("3171123923");
+        assertThat(new DayFourteen(47801).improvement()).isEqualTo("1342316410");
     }
 
     @Test
     public void realInputPart2() {
-        assertThat(new DayFourteen("765071").findFirstOccurrence()).isEqualTo(20353748);
+        assertThat(new DayFourteen("047801").findFirstOccurrence()).isEqualTo(20235230);
     }
 }

@@ -34,15 +34,16 @@ public class DayTwelveTest {
 
     @Test
     public void testPartOne() {
-        String input = "#..####.##..#.##.#..#.....##..#.###.#..###....##.##.#.#....#.##.####.#..##.###.#.......#............";
+        String input = "#.#####.#.#.####.####.#.#...#.......##..##.#.#.#.###..#.....#.####..#.#######.#....####.#....##....#";
         Set<String> realNotes = InputLoader.loadInputStream("inputDay12.txt").collect(Collectors.toSet());
         DayTwelve day12 = new DayTwelve(20, input, realNotes);
-        assertEquals(1696, day12.computeResult());
+        assertEquals(3566, day12.computeResult());
     }
 
 
+    @Test
     public void testPart2() {
-        String input = "#..####.##..#.##.#..#.....##..#.###.#..###....##.##.#.#....#.##.####.#..##.###.#.......#............";
+        String input = "#.#####.#.#.####.####.#.#...#.......##..##.#.#.#.###..#.....#.####..#.#######.#....####.#....##....#";
         Set<String> realNotes = InputLoader.loadInputStream("inputDay12.txt").collect(Collectors.toSet());
         DayTwelve day12 = new DayTwelve(50000000000l, input, realNotes);
         assertEquals(1799999999458l, day12.computeResult());

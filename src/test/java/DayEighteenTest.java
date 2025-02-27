@@ -117,7 +117,7 @@ public class DayEighteenTest {
         for (int i = 0; i < 10; i++) {
             map = map.change();
         }
-        assertEquals(564375, map.totalResourceValue());
+        assertEquals(582494, map.totalResourceValue());
     }
 
     @Test
@@ -146,7 +146,7 @@ public class DayEighteenTest {
         int result = (loopsize - previousIndex) % spread;
         long value = olderMaps.inverse().get(previousIndex+result-1).totalResourceValue();
 
-        assertEquals(189720, value);
+        assertEquals(174584, value);
     }
 
     private List<Acre> buildAcres(ArrayList<AcreType> acreTypes) {

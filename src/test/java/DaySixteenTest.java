@@ -31,12 +31,12 @@ public class DaySixteenTest {
         DaySixteen daySixteen = new DaySixteen();
         List<String> inputList = InputLoader.loadInputList("inputDay16part1.txt");
         daySixteen.buildOpCodes(inputList);
-        assertEquals(580, daySixteen.countCombinationsResolvedByAtLeast3OpCodes());
+        assertEquals(560, daySixteen.countCombinationsResolvedByAtLeast3OpCodes());
 
         List<String> inputOperations = InputLoader.loadInputList("inputDay16part2.txt");
         List<int[]> operations = inputOperations.stream().map(s -> OpCodeSample.convert(s, " ")).collect(toList());
         int[] result = daySixteen.executeProgram(operations);
-        assertEquals(537, result[0]);
+        assertEquals(622, result[0]);
 
     }
 

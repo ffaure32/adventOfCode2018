@@ -80,7 +80,7 @@ public class DayTwentyFiveTest {
             String[] split = line.split(",");
             d25.addStar(new Star(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]), Integer.parseInt(split[3])));
         }
-        assertEquals(8, d25.constellations.size());
+        assertEquals(377, d25.constellations.size());
     }
 
 }

@@ -98,7 +98,7 @@ public class DayTenTest {
             printed = dayThen.print();
             seconds++;
         } while(!printed);
-        assertEquals(10946, seconds);
+        assertEquals(10124, seconds);
     }
 
 }

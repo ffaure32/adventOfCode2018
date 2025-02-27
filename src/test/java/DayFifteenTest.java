@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class DayFifteenTest {
@@ -80,7 +81,7 @@ public class DayFifteenTest {
             fightMap.printPoints();
             fightOvers = fightMap.isFightOver();
         }
-        assertEquals(27730, fightMap.score());
+        assertEquals(27140, fightMap.score());
     }
 
     @Test
@@ -206,7 +207,7 @@ public class DayFifteenTest {
             fightMap.printPoints();
             fightOvers = fightMap.isFightOver();
         }
-        assertEquals(39514, fightMap.score());
+        assertEquals(235400, fightMap.score());
     }
 
     @Test
@@ -214,8 +215,9 @@ public class DayFifteenTest {
         List<String> otherInput = InputLoader.loadInputList("inputDay15.txt");
         boolean elvesWithoutLoss = false;
         int attackPower = 4;
+        FightMap fightMap = null;
         while(!elvesWithoutLoss) {
-            FightMap fightMap = new FightMap(otherInput, attackPower);
+            fightMap = new FightMap(otherInput, attackPower);
             boolean fightOvers = false;
             while (!fightOvers) {
                 fightMap.playRound();
@@ -228,5 +230,6 @@ public class DayFifteenTest {
             System.out.println(fightMap.score());
             attackPower++;
         }
+        assertThat(fightMap.score()).isEqualTo(44492);
     }
 }

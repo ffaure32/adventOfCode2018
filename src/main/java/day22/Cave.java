@@ -19,8 +19,8 @@ public class Cave {
 
     private void initErosionLevels() {
         erosionLevels = new HashMap<>();
-        for (int i = 0; i <= target.y * 7; i++) {
-            for (int j = 0; j <= target.x * 7; j++) {
+        for (int i = 0; i <= target.y; i++) {
+            for (int j = 0; j <= target.x; j++) {
                 Position position = new Position(j, i);
                 erosionLevels.put(position, erosionLevel(position));
             }
@@ -42,10 +42,10 @@ public class Cave {
             return 0;
         }
         if(y == 0) {
-            return x * 16807l;
+            return x * 16807L;
         }
         if(x == 0) {
-            return y * 48271l;
+            return y * 48271L;
         }
         return erosionLevels.get(new Position(x-1, y)) * erosionLevels.get(new Position(x, y-1));
     }

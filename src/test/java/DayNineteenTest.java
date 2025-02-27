@@ -1,9 +1,7 @@
 import day19.Register;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import sun.java2d.pipe.RegionIterator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -115,7 +113,7 @@ public class DayNineteenTest {
         register.executeInstructions();
 
         System.out.println(Arrays.toString(register.register));
-        assertEquals(1464, register.register[0]);
+        assertEquals(1302, register.register[0]);
     }
 
     @Test
@@ -127,7 +125,7 @@ public class DayNineteenTest {
         register.executeInstructions();
 
         System.out.println(Arrays.toString(register.register));
-        assertEquals(1464, register.register[1]);
+        assertEquals(1026, register.register[1]);
     }
 
 }

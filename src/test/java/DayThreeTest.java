@@ -61,7 +61,7 @@ public class DayThreeTest {
         int cells = dayThree.countOverlappingCells();
 
         // ASSERT
-        assertEquals(116140, cells);
+        assertEquals(118858, cells);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class DayThreeTest {
         Claim uniqueClaim = dayThree.getUniqueClaim();
 
         // ASSERT
-        assertEquals(574, uniqueClaim.id);
+        assertEquals(1100, uniqueClaim.id);
     }
 
 

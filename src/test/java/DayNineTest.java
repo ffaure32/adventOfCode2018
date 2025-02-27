@@ -85,6 +85,8 @@ public class DayNineTest {
     @Test
     public void testRealInput() {
         testEntry(486, 70833, 373597);
+        testEntry(405, 71700, 428690);
+        testEntry(405, 7170000, 428690);
     }
 
     @Test

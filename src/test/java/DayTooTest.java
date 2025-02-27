@@ -34,12 +34,12 @@ public class DayTooTest {
             numberOfTwos.addAndGet(collectPerLine.values().contains(2L) ? 1 : 0);
             numberOfThrees.addAndGet(collectPerLine.values().contains(3L) ? 1 : 0);
         });
-        System.out.println(numberOfTwos.get() * numberOfThrees.get());
+        assertEquals(7533, numberOfTwos.get() * numberOfThrees.get());
     }
 
     @Test
     public void testPartTwo() throws Exception {
-        dayTwo.partTwo().ifPresent(System.out::println);
+        assertEquals("mphcuasvrnjzzkbgdtqeoylva", dayTwo.partTwo().orElse(""));
     }
 
 

@@ -28,12 +28,12 @@ public class DayElevenTest {
 
     @Test
     public void testRealInput() {
-        FuelGrid grid = new FuelGrid(1723);
+        FuelGrid grid = new FuelGrid(7672);
 
         SquarePosition powerfulSquare = grid.findPowerfulSquare();
 
-        assertEquals(34, powerfulSquare.y);
-        assertEquals(13, powerfulSquare.x);
+        assertEquals(22, powerfulSquare.y);
+        assertEquals(18, powerfulSquare.x);
     }
 
     @Test
@@ -49,9 +49,8 @@ public class DayElevenTest {
     }
 
     @Test
-    @Ignore
     public void testRealInputPart2() {
-        FuelGrid grid = new FuelGrid(1723);
+        FuelGrid grid = new FuelGrid(7672);
 
         SquarePosition powerfulSquare = grid.findPowerfulSquareOfAnySize();
 

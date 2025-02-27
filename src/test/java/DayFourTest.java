@@ -73,14 +73,16 @@ public class DayFourTest {
         List<String> guardActions = InputLoader.loadInputList("inputDay4.txt");
         DayFour df = new DayFour(guardActions);
         List<Shift> shifts = df.getShifts();
-        assertThat(shifts).hasSize(293);
+        assertThat(shifts).hasSize(286);
         int idGuard = df.findMostAsleepGuard();
-        assertThat(idGuard).isEqualTo(733);
+        assertThat(idGuard).isEqualTo(2593);
         int minute = df.findMostAsleepMinuteForGuard(idGuard).first;
-        assertThat(minute).isEqualTo(48);
+        assertThat(minute).isEqualTo(40);
+        assertThat(idGuard * minute).isEqualTo(103720);
         Pair pair = df.findMostAsleepMinuteForAnyGuard();
-        assertThat(pair.first).isEqualTo(997);
-        assertThat(pair.second).isEqualTo(38);
+        assertThat(pair.first).isEqualTo(3361);
+        assertThat(pair.second).isEqualTo(33);
+        assertThat(pair.first * pair.second).isEqualTo(110913);
 
     }
 

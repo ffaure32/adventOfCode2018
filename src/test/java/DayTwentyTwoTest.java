@@ -34,9 +34,8 @@ public class DayTwentyTwoTest {
 
     @Test
     public void riskLevelRealInput() {
-        Cave cave = new Cave(8112, new Position(13, 743));
-
-        assertEquals(10395, cave.riskLevel());
+        Cave cave = new Cave(3066, new Position(13, 726));
+        assertEquals(10115, cave.riskLevel());
     }
 
     @Test
